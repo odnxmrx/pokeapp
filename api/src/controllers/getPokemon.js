@@ -1,59 +1,56 @@
-const { Pokemon, Type } = require('../config/db');
-const axios = require('axios');
-const mapPokemonObject = require('../utils/mapPokemon');
-
-const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
+const { Pokemon, Type } = require("../config/db");
+const getApiPokemonLot = require("../utils/getApiPokemonLot");
+const getApiSinglePokemon = require("../utils/getApiSinglePokemon");
 
 //DB by name
 const getPokemon = async (name) => {
-    try {
-        if(name) {
-            const singlePokemon = await Pokemon.findOne({
-                where: { name },
-                attributes: {
-                    exclude: ['createdAt', 'updatedAt'],
-                },
-                include: {
-                    model: Type,
-                    as: 'types',
-                    attributes: ['name'],
-                    through: {
-                        attributes: [] //tabla intermedia, nada
-                    },
-                }
-            });
+  try {
+    if (name) {
+      const singlePokemon = await Pokemon.findOne({
+        where: { name },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: {
+          model: Type,
+          as: "types",
+          attributes: ["name"],
+          through: {
+            attributes: [], //tabla intermedia, nada
+          },
+        },
+      });
 
-            if(singlePokemon) { //existe en DB
-                return singlePokemon;
-            } else {
-                //***********Search API */
-                try {
-                    const pokemonAPI = await axios(`${API_POKEMON}/${name}`);
-
-                    if(pokemonAPI.stauts === 404) throw Error('Pokemon was not found.');
-
-                    const data = pokemonAPI.data;
-
-                    if(!data.name) throw Error('Pokemon does not exists. Try other.');
-
-                    return mapPokemonObject(data); //execute mapping fn
-                } catch (error) {
-                    return {error: error.message};
+      if (singlePokemon) {
+        //existe en DB
+        return singlePokemon;
+      } else {
+        //***********Search API */
+        return getApiSinglePokemon(name);
+      }
+    } else {
+      //no se envio query =?name
+      try {
+        const allDatabasePokemon = await Pokemon.findAll({
+            include : {
+                model: Type,
+                as: "types",
+                attributes: ["name"],
+                through: { //tabla intermedia, nada
+                    attributes: [],
                 }
             }
-        } else { //no se envio query =?name
-            try {
-                const allPokemon = await Pokemon.findAll();
-                return allPokemon;
-            } catch (error) {
-                return { error: error.message };
-            }
-        }
-    } catch (error) {
-        
+        });
+        const allApiPokemon = await getApiPokemonLot(); //llamando la función
+
+        return [...allDatabasePokemon, ...allApiPokemon];
+      } catch (error) {
+        return { error: error.message };
+      }
     }
+  } catch (error) {}
 };
 
 module.exports = {
-    getPokemon,
-}
+  getPokemon,
+};
