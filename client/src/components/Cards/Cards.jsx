@@ -1,40 +1,48 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import { getAllPokemons } from "../../redux/actions/actions";
+// import { getAllPokemons } from "../../redux/actions/actions";
 import Card from "../Card/Card"
 import Searchbar from "../Searchbar/Searchbar";
 import FilterOrder from "../FilterOrder/FilterOrder";
 
 import style from './Cards.module.css';
+import PaginationBtn from "../PaginationBtn/PaginationBtn";
 
-const Cards = ({onSearch, allPokemons}) => {
+const Cards = ({ onSearch, allPokemons }) => {
 
     const dispatch = useDispatch();
-    // const { allPokemons } = useSelector((state) => state); //del estado, obtenemos allPokemons
+    const cardsPerPage = 12;
+    const [currentPage, setCurrentPage] = useState(1);
 
-    //   useEffect(() => {
-    //     dispatch(getAllPokemons());
-    //   }, [])
+    const indexOfLastItem = currentPage * cardsPerPage;
+    const indexOfFirstItem = indexOfLastItem - cardsPerPage;
 
-    // console.log(allPokemons);
+    const sliceOfPokemons = [...allPokemons];
+
+    const currentItemsToDisplay = sliceOfPokemons.slice(indexOfFirstItem, indexOfLastItem);
+
+    useEffect(() => {
+        setCurrentPage(1);
+        //     dispatch(getAllPokemons());
+    }, [])
+
+    // console.log(currentItemsToDisplay);
+
 
     return (
         <div className={style.mainContainer}>
-
             <div className={style.container}>
-
                 <div className={style.filterContainer}>
-                    {/* <SourceToggle sourceToggle={sourceToggle} setSourceToggle={setSourceToggle} setPage={setPage} /> */}
                     <Searchbar onSearch={onSearch} />
                     <FilterOrder />
+                    <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay} />
                 </div>
-                {/* <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemons.length} /> */}
             </div>
 
             <div className={style.container}>
                 {
-                    allPokemons?.map((pokemon) => {
+                    currentItemsToDisplay?.map((pokemon) => {
                         return (
                             <Card
                                 key={pokemon.id}
@@ -49,7 +57,7 @@ const Cards = ({onSearch, allPokemons}) => {
                     })
                 }
             </div>
-            {/* <NavigatorPack page={page} setPage={setPage} setPageSize={setPageSize} allPokemonsLength={allPokemons.length} /> */}
+            <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay} />
         </div>
     )
 }

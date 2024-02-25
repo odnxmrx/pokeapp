@@ -34,7 +34,7 @@ function App() {
   const allTypes = useSelector((state) => state.allTypes);
   // console.log('todos los tipos', allTypes);
   const allPokemons = useSelector(state => state.allPokemons);
-  console.log('todos los allPokemons', allPokemons);
+  // console.log('todos los allPokemons', allPokemons);
 
 
   //onSearch function for searchbar

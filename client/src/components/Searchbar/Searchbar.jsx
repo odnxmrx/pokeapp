@@ -20,12 +20,15 @@ const Searchbar = ({ onSearch }) => {
         setName('');
     }
 
+    const divStyle = {
+        display: "flex"
+    }
+
     return (
-        <div>
+        <div style={divStyle}>
             <label for="input"> Search Pokémon: <br />
                 <input type='search' name='input' id='input' placeholder="🔍 Pokémon name" value={name} onChange={handleChange} onKeyDown={handleKeyDown} />
             </label>
-            {/* <button onClick={() => { mySearch(name) }}>Search</button> */}
         </div>
     )
 }

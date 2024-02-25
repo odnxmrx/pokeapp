@@ -1,0 +1,21 @@
+.navigateContainer {
+    display: flex;
+    margin-left: auto;
+    text-align: center;
+    /* flex-grow: 1; */
+}
+
+.navigateContainer > span {
+    margin: auto 0;
+}
+
+.navBtn {
+    background-color: rgba(255, 255, 255, 0.125);
+    border-radius: .9em;
+    padding: 0.25em 0.5em;
+    margin: 0 5px;
+}
+
+.navBtn:hover {
+    cursor: pointer;
+}
