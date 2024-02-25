@@ -1,0 +1,32 @@
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  list-style-type: none;
+  align-items: baseline;
+  padding: 0px;
+  margin: 0;
+}
+
+li.myLogo {
+  margin-right: auto;
+}
+
+ul a {
+  color: inherit;
+  text-decoration: none;
+  /* font-size: 0.875rem; */
+  font-weight: 600;
+
+}
+
+.myLogo a {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
