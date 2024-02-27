@@ -55,7 +55,7 @@ const PokemonCreate = ({ allTypes }) => {
         //POST
         axios.post(`${URL_BASE}`, newPokemon).then(response => {
             // alert(response.data);
-            console.log('la respuesta fue: ', response.data);
+            // console.log('la respuesta fue: ', response.data);
             setNewPokemon({
                 name: '',
                 attack: '',
