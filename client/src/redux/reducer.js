@@ -48,14 +48,17 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_SOURCE:
-      const pokemonBySource = state.allPokemons.filter((pokemon) => {
+      const pokemonBySource = [...state.allPokemons].filter((pokemon) => {
         if (action.payload === "DB") {
           return pokemon?.id?.length > 8; //porque es un string UUID
         } else if (action.payload === "API") {
           return pokemon?.id < 1200; //porque es un Number
+        } 
+        else if (action.payload === "All") { // realmente necesito esto?
+          return pokemon?.id !== null;
         }
       });
-
+      // console.log('que es pokemonbysource? ', pokemonBySource);
       return {
         ...state,
         allPokemons:
@@ -63,9 +66,10 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_POKEMON_TYPE:
-      let pokemonByType = state.allPokemons.filter((pokemon) => {
+      let pokemonByType = [...state.allPokemons].filter((pokemon) => {
         return pokemon.types.some((type) => type.name === action.payload);
       });
+      // console.log('pokemonbyType??, ', pokemonByType);
       return {
         ...state,
         allPokemons:
@@ -104,6 +108,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case SET_FILTER_OPTIONS:
+      console.log('action.payload en el filterOptions?? ',action.payload);
       return {
         ...state,
         filterOptions: action.payload,

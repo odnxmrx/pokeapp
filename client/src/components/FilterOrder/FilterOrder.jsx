@@ -14,12 +14,15 @@ const FilterOrder = () => {
     });
 
     const handleSource = (event) => {
-        // dispatch(filterBySource("All")); //reseteo
+        dispatch(filterBySource("All")); //reseteo
+        dispatch(setFilterOptions({ ...filterOptions, type: "All" }));
+
         dispatch(setFilterOptions({ ...filterOptions, source: event.target.value }));
         dispatch(filterBySource(event.target.value));
     }
 
     const handleTypeFilter = (event) => {
+        // dispatch(filterByPokemonType("All")); //reseteo del type
         dispatch(setFilterOptions({ ...filterOptions, type: event.target.value }));
         dispatch(filterByPokemonType(event.target.value));
     };

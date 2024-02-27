@@ -27,7 +27,7 @@ const Card = ({ id, name, image, hp, attack, types }) => {
 
                   <ul>
                       <li>
-                          <label for="hp">
+                          <label htmlFor="hp">
                               <span>HP</span><span>{hp}</span>
                           </label>
                           <meter 
@@ -44,7 +44,7 @@ const Card = ({ id, name, image, hp, attack, types }) => {
                       </li>
 
                       <li>
-                          <label for="attack">
+                          <label htmlFor="attack">
                               <span>Attack</span><span>{attack}</span>
                           </label>
                           <meter 

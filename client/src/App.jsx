@@ -24,11 +24,7 @@ function App() {
   const { pathname } = useLocation();
 
   //traer 'types' del estado global
-  const { allTypes, allPokemons } = useSelector((state) => state);
-  // console.log('todos los tipos', allTypes);
-  // const allPokemons = useSelector(state => state.allPokemons);
-  // console.log('todos los allPokemons', allPokemons);
-
+  const { allTypes } = useSelector((state) => state);
 
   //onSearch function for searchbar
   function onSearch(name) {
@@ -60,7 +56,7 @@ function App() {
       {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Welcome />} />
-        <Route path="/home" element={<Cards allPokemons={allPokemons} onSearch={onSearch} />} />
+        <Route path="/home" element={<Cards onSearch={onSearch} />} />
         <Route path="/create" element={<PokemonCreate allTypes={allTypes} />} />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />

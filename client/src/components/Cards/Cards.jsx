@@ -8,25 +8,22 @@ import style from './Cards.module.css';
 import PaginationBtn from "../PaginationBtn/PaginationBtn";
 import { useSelector } from "react-redux";
 
-const Cards = ({ onSearch, allPokemons }) => {
+const Cards = ({ onSearch }) => {
 
     const cardsPerPage = 12;
     const [currentPage, setCurrentPage] = useState(1);
 
+    const { allPokemons, filterOptions } = useSelector(state => state);
+
     const indexOfLastItem = currentPage * cardsPerPage;
     const indexOfFirstItem = indexOfLastItem - cardsPerPage;
 
-    const sliceOfPokemons = [...allPokemons];
-
-    const currentItemsToDisplay = sliceOfPokemons.slice(indexOfFirstItem, indexOfLastItem);
-
-
-    const { filterOptions } = useSelector(state => state);
-
+    // const sliceOfPokemons = [...allPokemons];
+    const currentItemsToDisplay = allPokemons.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         // setCurrentPage(1);
-    }, [filterOptions.source])
+    }, [filterOptions])
 
     // console.log('los actuales currentItemsToDisplay a mstrar: ', currentItemsToDisplay);
 
