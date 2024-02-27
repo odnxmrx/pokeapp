@@ -3,6 +3,7 @@ import {
   GET_POKEMON_DETAIL,
   CLEAN_POKEMON_DETAIL,
   GET_ALL_TYPES,
+  FILTER_BY_SOURCE,
   FILTER_BY_POKEMON_TYPE,
   ORDER_BY_POKEMON_NAME,
   ORDER_BY_POKEMON_ATTACK,
@@ -64,6 +65,14 @@ export const getAllTypes = () => {
       });
   };
 };
+
+
+export const filterBySource = (pokemonsource) => {
+  return {
+    type: FILTER_BY_SOURCE,
+    payload: pokemonsource,
+  }
+}
 
 export const filterByPokemonType = (type) => {
   return {

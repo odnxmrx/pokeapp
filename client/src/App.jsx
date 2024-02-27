@@ -23,17 +23,10 @@ function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  useEffect(()=> {
-    //componentDidMout
-    dispatch(getAllPokemons());
-    dispatch(getAllTypes());
-  }, [])
-
-
   //traer 'types' del estado global
-  const allTypes = useSelector((state) => state.allTypes);
+  const { allTypes, allPokemons } = useSelector((state) => state);
   // console.log('todos los tipos', allTypes);
-  const allPokemons = useSelector(state => state.allPokemons);
+  // const allPokemons = useSelector(state => state.allPokemons);
   // console.log('todos los allPokemons', allPokemons);
 
 
@@ -54,6 +47,12 @@ function App() {
       )// catch respuesta (error) del servidor:
       .catch(err => alert(err.message))
   }
+
+  useEffect(() => {
+    //componentDidMout
+    dispatch(getAllPokemons());
+    dispatch(getAllTypes());
+  }, [])
 
 
   return (

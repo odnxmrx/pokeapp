@@ -3,6 +3,7 @@ import {
   GET_POKEMON_DETAIL,
   CLEAN_POKEMON_DETAIL,
   GET_ALL_TYPES,
+  FILTER_BY_SOURCE,
   FILTER_BY_POKEMON_TYPE,
   ORDER_BY_POKEMON_NAME,
   ORDER_BY_POKEMON_ATTACK,
@@ -13,8 +14,9 @@ const initialState = {
   allPokemons: [],
   pokemonDetail: {},
   allTypes: [],
-  allPokemonAux: [],
+  allPokemonsAux: [],
   filterOptions: {
+    source: "All",
     type: "All",
     orderByName: "A",
     orderByAttack: "Menor",
@@ -27,7 +29,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allPokemons: action.payload,
-        allPokemonAux: action.payload,
+        allPokemonsAux: action.payload,
       };
     case GET_POKEMON_DETAIL:
       return {
@@ -44,33 +46,49 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allTypes: action.payload,
       };
-    case FILTER_BY_POKEMON_TYPE:
-      const pokemonByType = [...state.allPokemons].filter((pokemon) => {
-        return pokemon.types.some((type) => type.name === action.payload);
+
+    case FILTER_BY_SOURCE:
+      const pokemonBySource = state.allPokemons.filter((pokemon) => {
+        if (action.payload === "DB") {
+          return pokemon?.id?.length > 8; //porque es un string UUID
+        } else if (action.payload === "API") {
+          return pokemon?.id < 1200; //porque es un Number
+        }
       });
 
       return {
         ...state,
         allPokemons:
-          action.payload === "All" ? state.allPokemonAux : pokemonByType,
+          action.payload === "All" ? state.allPokemonsAux : pokemonBySource,
       };
-    case ORDER_BY_POKEMON_NAME:
-      const sortPokemonByName = [...state.allPokemons];
 
-      sortPokemonByName.sort((firstEl, secondEl) => {
-        if (action.payload === "A") {
-          return firstEl.name.localeCompare(secondEl.name); //ordenando caracteres no ASCII
-        } else if (action.payload === "D") {
-          return secondEl.name.localeCompare(firstEl.name);
-        }
+    case FILTER_BY_POKEMON_TYPE:
+      let pokemonByType = state.allPokemons.filter((pokemon) => {
+        return pokemon.types.some((type) => type.name === action.payload);
       });
+      return {
+        ...state,
+        allPokemons:
+          action.payload === "All" ? state.allPokemonsAux : pokemonByType,
+      };
+
+    case ORDER_BY_POKEMON_NAME:
+      let sortPokemonByName = [...state.allPokemons].sort(
+        (firstEl, secondEl) => {
+          if (action.payload === "A") {
+            return firstEl.name.localeCompare(secondEl.name); //ordenando caracteres no ASCII
+          } else if (action.payload === "D") {
+            return secondEl.name.localeCompare(firstEl.name);
+          }
+        }
+      );
 
       return {
         ...state,
         allPokemons: sortPokemonByName,
       };
     case ORDER_BY_POKEMON_ATTACK:
-      const sortPokemonByAttack = [...state.allPokemons].sort(
+      let sortPokemonByAttack = [...state.allPokemons].sort(
         (firstEl, secondEl) => {
           if (action.payload === "Menor") {
             return firstEl.attack - secondEl.attack;
@@ -84,6 +102,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allPokemons: sortPokemonByAttack,
       };
+
     case SET_FILTER_OPTIONS:
       return {
         ...state,
