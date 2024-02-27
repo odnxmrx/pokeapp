@@ -3,9 +3,7 @@ import style from "./PaginationBtn.module.css";
 
 const PaginationBtn = ({ currentPage, cardsPerPage, setCurrentPage, currentItemsToDisplay }) => {
 
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
 
   return (
     <div className={style.navigateContainer}>
