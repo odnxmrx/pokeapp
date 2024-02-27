@@ -43,7 +43,7 @@ return (
 
                 <ul>
                     <li>
-                        <label for="hp">
+                        <label htmlFor="hp">
                             <span>HP</span><span>{pokemonDetail?.hp}</span>
                         </label>
                         <meter
@@ -60,7 +60,7 @@ return (
                     </li>
 
                     <li>
-                        <label for="attack">
+                        <label htmlFor="attack">
                             <span>Attack</span> <span>{pokemonDetail?.attack}</span>
                         </label>
                         <meter
@@ -77,7 +77,7 @@ return (
                     </li>
 
                     <li>
-                        <label for="defense">
+                        <label htmlFor="defense">
                             <span>Defense</span> <span>{pokemonDetail?.defense}</span>
                         </label>
                         <meter
@@ -94,7 +94,7 @@ return (
                     </li>
 
                     <li>
-                        <label for="speed">
+                        <label htmlFor="speed">
                             <span>Speed:</span> <span>{pokemonDetail?.speed}</span>
                         </label>
                         <meter

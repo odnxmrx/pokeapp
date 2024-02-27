@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
-// import { getAllPokemons } from "../../redux/actions/actions";
 import Card from "../Card/Card"
 import Searchbar from "../Searchbar/Searchbar";
 import FilterOrder from "../FilterOrder/FilterOrder";
 
 import style from './Cards.module.css';
 import PaginationBtn from "../PaginationBtn/PaginationBtn";
+import { useSelector } from "react-redux";
 
 const Cards = ({ onSearch, allPokemons }) => {
 
-    const dispatch = useDispatch();
     const cardsPerPage = 12;
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,22 +20,22 @@ const Cards = ({ onSearch, allPokemons }) => {
 
     const currentItemsToDisplay = sliceOfPokemons.slice(indexOfFirstItem, indexOfLastItem);
 
+
+    const { filterOptions } = useSelector(state => state);
+
+
     useEffect(() => {
-        setCurrentPage(1);
-        //     dispatch(getAllPokemons());
-    }, [])
+        // setCurrentPage(1);
+    }, [filterOptions.source])
 
-    // console.log(currentItemsToDisplay);
-
+    // console.log('los actuales currentItemsToDisplay a mstrar: ', currentItemsToDisplay);
 
     return (
         <div className={style.mainContainer}>
-            <div className={style.container}>
-                <div className={style.filterContainer}>
-                    <Searchbar onSearch={onSearch} />
-                    <FilterOrder />
-                    <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay} />
-                </div>
+            <div className={style.filterContainer}>
+                <Searchbar onSearch={onSearch} />
+                <FilterOrder />
+                <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay} />
             </div>
 
             <div className={style.container}>
