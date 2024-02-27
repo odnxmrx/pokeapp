@@ -32,14 +32,16 @@ const getPokemon = async (name) => {
       //no se envio query =?name
       try {
         const allDatabasePokemon = await Pokemon.findAll({
-            include : {
-                model: Type,
-                as: "types",
-                attributes: ["name"],
-                through: { //tabla intermedia, nada
-                    attributes: [],
-                }
-            }
+          include: {
+            model: Type,
+            as: "types",
+            attributes: ["name"],
+            through: {
+              //tabla intermedia, nada
+              attributes: [],
+            },
+          },
+          order: [["createdAt", "ASC"]],
         });
         const allApiPokemon = await getApiPokemonLot(); //llamando la función
 
