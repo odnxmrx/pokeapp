@@ -14,3 +14,6 @@ ___
 - Sequelize ORM
 - PostgreSQL
 
+## Run project
+Run Front End project
+```npm run dev```
