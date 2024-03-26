@@ -17,7 +17,7 @@ const getTypesHandler = async (req, res) => {
   try {
 
     //make sure always attempt to POST them Types
-    await postTypesController();
+    const responsePostType = await postTypesController();
     // console.log('respuesta primera: ', responsePostType);
 
     const response = await getAllTypes();

@@ -42,6 +42,7 @@ const rootReducer = (state = initialState, action) => {
         pokemonDetail: {},
       };
     case GET_ALL_TYPES:
+      // console.log('estoy lllegando?? ', action.payload);
       return {
         ...state,
         allTypes: action.payload,
@@ -108,7 +109,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case SET_FILTER_OPTIONS:
-      console.log('action.payload en el filterOptions?? ',action.payload);
+      // console.log('action.payload en el filterOptions?? ',action.payload);
       return {
         ...state,
         filterOptions: action.payload,
