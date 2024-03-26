@@ -11,8 +11,8 @@ import {
 } from "./action-types";
 import axios from "axios";
 
-// const URL_BASE = "https://pokeapp-w0td.onrender.com/pokemonapi";
-const URL_BASE = 'http://localhost:3001/pokemonapi';
+const URL_BASE = "https://pokeapp-web-service.onrender.com/pokemonapi";
+// const URL_BASE = 'http://localhost:3001/pokemonapi';
 
 export const getAllPokemons = () => {
   return async (dispatch) => {

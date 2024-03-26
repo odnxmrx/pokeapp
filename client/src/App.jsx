@@ -17,8 +17,8 @@ import PokemonCreate from './components/PokemonCreate/PokemonCreate';
 
 function App() {
 
-  // const URL_BASE = 'https://pokeapp-w0td.onrender.com/pokemonapi';
-  const URL_BASE = 'http://localhost:3001/pokemonapi';
+  const URL_BASE = 'https://pokeapp-web-service.onrender.com/pokemonapi';
+  // const URL_BASE = 'http://localhost:3001/pokemonapi';
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
       </Routes>
-      <Footer />
+      {pathname !== "/" && <Footer />}
     </div>
   )
 }

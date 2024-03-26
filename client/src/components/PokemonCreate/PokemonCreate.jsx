@@ -1,13 +1,20 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { validatePokemon } from "../../utils/validation";
+import { getAllPokemons } from "../../redux/actions/actions";
 import style from './PokemonCreate.module.css';
 import BackButton from "../BackButton/BackButton";
 import pokemonlabpic from '../../assets/pokemon_lab_by_jynxedones_d93e28q-375w-2x.jpg';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PokemonCreate = ({ allTypes }) => {
 
-    const URL_BASE = 'http://localhost:3001/pokemonapi/pokemons';
+    const URL_BASE = 'https://pokeapp-web-service.onrender.com/pokemonapi/pokemons';
+    // const URL_BASE = 'http://localhost:3001/pokemonapi/pokemons';
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const [newPokemon, setNewPokemon] = useState({
         name: '',
@@ -55,7 +62,7 @@ const PokemonCreate = ({ allTypes }) => {
         //POST
         axios.post(`${URL_BASE}`, newPokemon).then(response => {
             // alert(response.data);
-            // console.log('la respuesta fue: ', response.data);
+            // console.log('la respuesta fue: ', response);
             setNewPokemon({
                 name: '',
                 attack: '',
@@ -67,8 +74,10 @@ const PokemonCreate = ({ allTypes }) => {
                 // types: [],
                 weight: '',
             });
+            navigate(`/detail/${response?.data?.newPokemon?.id}`)
         })
-            .catch(error => alert(error.message));
+        .catch(error => alert(error.message));
+        
     };
 
     const disableBtnValidator = () => {
@@ -78,6 +87,13 @@ const PokemonCreate = ({ allTypes }) => {
             newPokemon.types.length > 0
         )
     }
+
+    useEffect(()=> {
+        return () => {
+            console.log('about to dismount');
+            dispatch(getAllPokemons());
+        }
+    }, [])
 
     return (
         <div>
