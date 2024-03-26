@@ -6,7 +6,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, PORT } = process.env;
 
 const sequelize = new Sequelize(
    `postgres://pokeapidb_tiw6_user:OrstQ8UWQvARmr7eNOX989Md8EkxjVBK@dpg-co0t9h6ct0pc73fl14qg-a.oregon-postgres.render.com/pokeapidb_tiw6`,
-   //`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`,
+   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
    {
       dialectOptions: {
          ssl: {

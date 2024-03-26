@@ -20,6 +20,7 @@
 const server = require('./src/app.js'); //también se nombra 'app'
 const { conn } = require('./src/config/db.js');
 require('dotenv').config();
+
 // const { PORT } = process.env;
 const PORT = 5432;
 

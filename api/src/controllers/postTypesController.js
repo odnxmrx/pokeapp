@@ -10,7 +10,7 @@ const postTypesController = async () => {
     const data = response.data.results;
     // console.log('que es data.results??', data);
     const realData = mapType(data);
-    // console.log("la realData??? ", realData);
+    console.log("la realData??? ", realData);
 
     return await Type.bulkCreate(realData, {
       validate: true
@@ -34,8 +34,8 @@ function mapType(arrayOfTypes) {
       name: item.name,
     });
   });
+  console.log('relleno algo rearrengedTypes??', rearrengedTypes);
   return rearrengedTypes;
-  // console.log('relleno algo rearrengedTypes??', rearrengedTypes);
 }
 
 module.exports = {
