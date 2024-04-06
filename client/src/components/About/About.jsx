@@ -1,7 +1,6 @@
 import BackButton from '../BackButton/BackButton';
 import style from './About.module.css';
-import pokemonintrovideo from '../../assets/opening-pokemon-t1-latino.mp4'
-import oldtvfram from '../../assets/old-tv-png-photo.png';
+import TvVideo from '../TvVideo/TvVideo';
 
 const About = () => {
 
@@ -29,13 +28,7 @@ const About = () => {
                     <p><em>Full-Stack Developer</em></p>
                 </div>
                 <div className={style.rightContainer}>
-                    <div className={style.videoFrame}>
-                        <video autoPlay muted loop id={style.myVideo}>
-                            <source src={pokemonintrovideo} type="video/mp4" />
-                            Your browser does not support HTML5 video.
-                        </video>
-                        <img className={style.pokemonLogo} src={oldtvfram} alt="Pokémon logo" />
-                    </div>
+                    <TvVideo />
                 </div>
             </div>
         </div>

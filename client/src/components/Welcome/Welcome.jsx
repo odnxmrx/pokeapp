@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import pokemonintrovideo from '../../assets/opening-pokemon-t1-latino.mp4'
 import style from './Welcome.module.css';
+import TvVideo from "../TvVideo/TvVideo";
+import fullbackgroundimage from '../../assets/bg-image-pokemon-wallpaper-tiny.png'
 
 const Welcome = () => {
     const navigate = useNavigate();
@@ -10,26 +11,27 @@ const Welcome = () => {
         if (video.paused) {
             video.play();
             // btn.innerHTML = "Pause";
-          } else {
+        } else {
             video.pause();
             // btn.innerHTML = "Play";
-          }
+        }
     }
 
     return (
-        <div>
-            <video autoPlay muted loop id={style.myVideo}>
-                <source src={pokemonintrovideo} type="video/mp4" />
-                Your browser does not support HTML5 video.
-            </video>
+        <main id={style.fullBgContainer}>
+            <img id={style.myBgImg} src={fullbackgroundimage} />
             <div className={style.contentW}>
-
-                <h1>PokéApp</h1>
-                <p>Welcome to my Pokémon App. Here you'll find all things Pokémon. <br />Chatch 'em all! or create your own!</p>
-                <button onClick={() => navigate('/home')}>Enter →</button>
-            {/* <button onClick={()=> playPauseBtn()}>Play/Pause</button> */}
+                <div className={style.leftContainer}>
+                    <h1>PokéApp</h1>
+                    <h2>Welcome to my Pokémon App.</h2>
+                    <p>Here you'll find all things Pokémon. <br />Chatch 'em all! or create your own!</p>
+                    <button onClick={() => navigate('/home')}>Enter →</button>
+                </div>
+                <div className={style.rightContainer}>
+                    <TvVideo />
+                </div>
             </div>
-        </div>
+        </main>
     )
 }
 

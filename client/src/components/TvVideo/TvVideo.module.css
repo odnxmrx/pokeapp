@@ -1,0 +1,23 @@
+.pokemonLogo {
+  position: absolute;
+  top: 10;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+.videoFrame {
+  position: relative;
+  left: 5px;
+  width: 400px;
+  height: auto;
+}
+
+#myVideo {
+width: 380px;
+height: auto;
+position: relative;
+left: 10px;
+top: 15px;
+}

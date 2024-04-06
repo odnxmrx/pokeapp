@@ -1,20 +1,57 @@
+#fullBgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-#myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%; 
-    min-height: 100%;
-  }
+#myBgImg {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
 
-  .contentW {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 0.7rem;
-    background: rgba(10, 40, 95, 0.5);
-    color: #f1f1f1;
-    width: 50%;
-    padding: 20px;
+.contentW {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(47, 47, 47, 0.56);
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px);
+  min-height: 350px;
+  padding: 35px;
+  display: flex;
+  gap: 16px;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  min-width: 300px;
+}
+
+.leftContainer h1,
+.leftContainer h2 {
+  margin: 0;
+}
+
+.rightContainer {
+  display: flex;
+  flex-grow: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive welcome page */
+@media screen and (max-width: 680px) {
+  .rightContainer {
+    display: none;
   }
+}
