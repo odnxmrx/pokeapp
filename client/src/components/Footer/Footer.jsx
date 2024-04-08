@@ -5,7 +5,7 @@ import githublogo from '../../assets/icons8-github.svg';
 export default function Footer() {
 
     return (
-        <div className={style.myFooter}>
+        <footer className={style.myFooter}>
             <div className={style.leftContainer}>
                 <span>Developed with 💛 by Armando Gama @ 2024</span>
                 <br />
@@ -16,6 +16,6 @@ export default function Footer() {
             <div>
                 <img className={style.pokemonLogo} src={pokemonlogo} alt="Pokémon logo" />
             </div>
-        </div>
+        </footer>
     )
 }

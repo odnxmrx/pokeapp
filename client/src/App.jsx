@@ -53,7 +53,7 @@ function App() {
 
 
   return (
-    <div className='pagecontainer'>
+    <main id='pageContainer'>
       {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Welcome />} />
@@ -63,7 +63,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
       </Routes>
       {pathname !== "/" && <Footer />}
-    </div>
+    </main>
   )
 }
 
