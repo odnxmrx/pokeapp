@@ -1,5 +1,5 @@
 const { Pokemon, Type } = require("../config/db");
-const getApiPokemonLot = require("../utils/getApiPokemonLot");
+const { getApiPokemonLot } = require("../utils/getApiPokemonLot");
 const getApiSinglePokemon = require("../utils/getApiSinglePokemon");
 
 //DB by name
@@ -43,7 +43,8 @@ const getPokemon = async (name) => {
           },
           order: [["createdAt", "ASC"]],
         });
-        const allApiPokemon = await getApiPokemonLot(); //llamando la función
+
+        const allApiPokemon = await getApiPokemonLot(); //llamando la función asincronica
 
         return [...allDatabasePokemon, ...allApiPokemon];
       } catch (error) {

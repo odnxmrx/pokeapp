@@ -1,55 +1,70 @@
 const axios = require("axios");
 const mapPokemonObject = require("./mapPokemon");
-let POKEMON_LIMIT = 150;
+let POKEMON_LIMIT = 5;
 const API_POKEMON = `https://pokeapi.co/api/v2/pokemon`;
 
-// const getApiPokemonLot = async () => {
-//   try {
-//     let remotePokemons = [];
-//     let i = 1;
-//     while (i <= POKEMON_LIMIT) {
-//       const response = await axios(`${API_POKEMON}/${i}`);
+/******************************* */
+// const getApiPokemonLot = () => {
+//   let arrayOfIterablePokemon = [];
 
-//       const data = response.data;
+//   fetch(`${API_POKEMON}?limit=${POKEMON_LIMIT}`)
+//     .then((response) => response.json())
+//     .then(function (allPokemon) {
+//       // console.log('array de TODOS allPokemon: ', allPokemon); // array of all pokemon
+//       allPokemon.results.forEach(function (pokemon) {
+//         arrayOfIterablePokemon.push(fetchPokemonDetail(pokemon));
+//         // console.log(aver);
+//       });
+//     })
+//     .catch((error) => console.log("lot arr err: ", error));
 
-//       remotePokemons.push(mapPokemonObject(data));
-//       i++;
-//     }
+//   function fetchPokemonDetail(singlePokemon) {
+//     // singlePokemon = { name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/' }
+//     let urlPokemon = singlePokemon?.url;
 
-//     return remotePokemons;
-//   } catch (error) {
-//     return { error: error.message };
+//     fetch(urlPokemon)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         // console.log('que es data?? ', data);
+//         mapPokemonObject(data);
+//         // console.log("pokemonReformated?? Debe ser obj: ", pokemonReformated);
+//         // arrayOfIterablePokemon.push(pokemonReformated);
+//         // console.log('que va siendo el arr arrayOfIterablePokemon:?? ', arrayOfIterablePokemon);
+//       })
+//       .catch((error) => console.log("single obj error: ", error));
 //   }
+//   console.log("el arreglo arrayOfIterablePokemon final???", arrayOfIterablePokemon);
+//   return arrayOfIterablePokemon;
 // };
 
-const getApiPokemonLot = () => {
+const getApiPokemonLot = async () => {
+  let arrayOfIterablePokemon = [];
+
   try {
-    let arrayOfIterablePokemon = [];
-    fetch(`${API_POKEMON}?limit=${POKEMON_LIMIT}`)
-      .then((response) => response.json())
-      .then(function (allPokemon) {
-        // console.log('array de TODOS allPokemon: ', allPokemon); // array of all pokemon
-        allPokemon.results.forEach(function (pokemon) {
-          fetchPokemonDetail(pokemon);
-        });
-      });
+    const response = await fetch(`${API_POKEMON}?limit=${POKEMON_LIMIT}`);
+    const allPokemon = await response.json();
 
-    function fetchPokemonDetail(singlePokemon) {
-      // singlePokemon = { name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/' }
-      let urlPokemon = singlePokemon?.url;
-
-      fetch(urlPokemon)
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log('que es data?? ', data);
-          arrayOfIterablePokemon.push(mapPokemonObject(data));
-        });
+    for (const pokemon of allPokemon.results) {
+      const pokemonDetailResponse = await fetchPokemonDetail(pokemon); //llamada a fn asincrona
+      arrayOfIterablePokemon.push(pokemonDetailResponse);
     }
-
-    return arrayOfIterablePokemon;
   } catch (error) {
-    return { error: error.message };
+    return { error };
+  }
+  // console.log("Final array of Pokemon: ", arrayOfIterablePokemon);
+  return arrayOfIterablePokemon;
+};
+
+const fetchPokemonDetail = async (singlePokemon) => {
+  try {
+    const response = await fetch(singlePokemon.url);
+    const data = await response.json();
+    const pokemonReformated = mapPokemonObject(data);
+    return pokemonReformated;
+  } catch (error) {
+    console.log("Error fetching Pokemon detail: ", error);
+    return { error };
   }
 };
 
-module.exports = getApiPokemonLot;
+module.exports = { getApiPokemonLot };
