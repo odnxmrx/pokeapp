@@ -1,6 +1,6 @@
 const axios = require("axios");
 const mapPokemonObject = require("./mapPokemon");
-let POKEMON_LIMIT = 5;
+let POKEMON_LIMIT = 150;
 const API_POKEMON = `https://pokeapi.co/api/v2/pokemon`;
 
 /******************************* */
