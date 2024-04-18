@@ -5,13 +5,16 @@ import Searchbar from "../Searchbar/Searchbar";
 import FilterOrder from "../FilterOrder/FilterOrder";
 
 import style from './Cards.module.css';
+import pokeballgif from '../../assets/pokeball-d5s04qj-d26a072a-3294-4da7-8ab9-a1be78141275.gif'
 import PaginationBtn from "../PaginationBtn/PaginationBtn";
 import { useSelector } from "react-redux";
+import LoadingMessage from "../LoadingMessage/LoadingMessage";
 
 const Cards = ({ onSearch }) => {
 
     const cardsPerPage = 12;
     const [currentPage, setCurrentPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { allPokemons, filterOptions } = useSelector(state => state);
 
@@ -23,9 +26,14 @@ const Cards = ({ onSearch }) => {
 
     useEffect(() => {
         // setCurrentPage(1);
-    }, [filterOptions])
+        checkForObjectsOnGlobalState(); //check if there are objects to work on
+    }, [filterOptions, allPokemons])
 
-    // console.log('los actuales currentItemsToDisplay a mstrar: ', currentItemsToDisplay);
+    function checkForObjectsOnGlobalState() {
+        if(allPokemons.length > 1) {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <div className={style.mainContainer}>
@@ -37,19 +45,21 @@ const Cards = ({ onSearch }) => {
 
             <div className={style.container}>
                 {
-                    currentItemsToDisplay?.map((pokemon) => {
-                        return (
-                            <Card
-                                key={pokemon.id}
-                                id={pokemon.id}
-                                name={pokemon.name}
-                                image={pokemon.image}
-                                hp={pokemon.hp}
-                                attack={pokemon.attack}
-                                types={pokemon.types}
-                            />
-                        )
-                    })
+                    isLoading ? (<LoadingMessage />) : (
+                        currentItemsToDisplay?.map((pokemon) => {
+                            return (
+                                <Card
+                                    key={pokemon.id}
+                                    id={pokemon.id}
+                                    name={pokemon.name}
+                                    image={pokemon.image}
+                                    hp={pokemon.hp}
+                                    attack={pokemon.attack}
+                                    types={pokemon.types}
+                                />
+                            )
+                        })
+                    )
                 }
             </div>
             <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay} />

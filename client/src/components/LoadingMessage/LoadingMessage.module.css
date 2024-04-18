@@ -1,0 +1,13 @@
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin: auto;
+  align-items: center;
+}
+
+#pokeimg {
+  width: 150px;
+  height: auto;
+  display: block;
+}
