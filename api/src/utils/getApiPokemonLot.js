@@ -19,15 +19,8 @@ const getApiPokemonLot = async (POKEMON_LIMIT1, POKEMON_OFFSET1) => {
     }
   } catch (error) {
     return { error };
-  } finally { //either way
-    // const response = await fetch(`${API_POKEMON}?offset=${POKEMON_OFFSET + 50}&limit=${POKEMON_LIMIT + 50}`);
-    // const allPokemon = await response.json();
-
-    // for (const pokemon of allPokemon.results) {
-    //   const pokemonDetailResponse = await fetchPokemonDetail(pokemon); //llamada a fn asincrona
-    //   arrayOfIterablePokemon.push(pokemonDetailResponse);
-    // }
-  }
+  } 
+  
   return arrayOfIterablePokemon;
 };
 
