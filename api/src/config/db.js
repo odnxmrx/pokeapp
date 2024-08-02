@@ -2,10 +2,10 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, DATABASE_URI } = process.env;
 
 const sequelize = new Sequelize(
-   `postgresql://mypokeapppgdb2_user:QwdfIctEptzwZmW6LprvCKOX8hUHFzWX@dpg-cqm5ftpu0jms73flpvag-a.oregon-postgres.render.com/mypokeapppgdb2`,
+   DATABASE_URI,
    // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
    {
       dialectOptions: {
