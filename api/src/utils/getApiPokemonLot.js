@@ -1,7 +1,7 @@
 const mapPokemonObject = require("./mapPokemon");
 const API_POKEMON_URL = `https://pokeapi.co/api/v2/pokemon`;
 
-const getApiPokemonLot = async (POKEMON_LIMIT, POKEMON_OFFSET) => {  
+const getApiPokemonLot = async (POKEMON_OFFSET, POKEMON_LIMIT) => {  
   
   let arrayOfIterablePokemon = [];
   try {
@@ -15,7 +15,8 @@ const getApiPokemonLot = async (POKEMON_LIMIT, POKEMON_OFFSET) => {
   } catch (error) {
     return { error };
   } 
-
+  // console.log('el fetch array: ', arrayOfIterablePokemon);
+  
   return arrayOfIterablePokemon;
 };
 
