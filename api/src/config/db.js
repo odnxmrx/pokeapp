@@ -5,7 +5,7 @@ const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
 
 const sequelize = new Sequelize(
-   `postgres://pgdbpokeapp_user:JX9RUTTtx8Kjr4NmbDPbudL50kuYLoaW@dpg-co1h275a73kc73ceujn0-a.oregon-postgres.render.com/pgdbpokeapp`,
+   `postgresql://mypokeapppgdb2_user:QwdfIctEptzwZmW6LprvCKOX8hUHFzWX@dpg-cqm5ftpu0jms73flpvag-a.oregon-postgres.render.com/mypokeapppgdb2`,
    // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
    {
       dialectOptions: {
