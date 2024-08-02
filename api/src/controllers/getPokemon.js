@@ -31,6 +31,8 @@ const getPokemon = async (name) => {
     } else {
       //no se envio query =?name
       try {
+        let POKEMON_OFFSET1 = 0;
+        let POKEMON_LIMIT1 = 50;
         const allDatabasePokemon = await Pokemon.findAll({
           include: {
             model: Type,
@@ -44,9 +46,10 @@ const getPokemon = async (name) => {
           order: [["createdAt", "ASC"]],
         });
 
-        const allApiPokemon = await getApiPokemonLot(); //llamando la función asincronica
+        const allApiPokemon50 = await getApiPokemonLot(POKEMON_OFFSET1, POKEMON_LIMIT1); //llamando la función asincronica
+        const allApiPokemon150 = await getApiPokemonLot(POKEMON_OFFSET1 + 50, POKEMON_LIMIT1 + 50);
 
-        return [...allDatabasePokemon, ...allApiPokemon];
+        return [...allDatabasePokemon, ...allApiPokemon50, ...allApiPokemon150];
       } catch (error) {
         return { error: error.message };
       }
