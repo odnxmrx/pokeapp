@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import pokeballgif from '../../assets/pokeball-d5s04qj-d26a072a-3294-4da7-8ab9-a1be78141275.gif'
 import style from "./LoadingMessage.module.css";
 

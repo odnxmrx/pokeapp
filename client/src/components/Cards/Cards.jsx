@@ -5,7 +5,7 @@ import Searchbar from "../Searchbar/Searchbar";
 import FilterOrder from "../FilterOrder/FilterOrder";
 
 import style from './Cards.module.css';
-import pokeballgif from '../../assets/pokeball-d5s04qj-d26a072a-3294-4da7-8ab9-a1be78141275.gif'
+
 import PaginationBtn from "../PaginationBtn/PaginationBtn";
 import { useSelector } from "react-redux";
 import LoadingMessage from "../LoadingMessage/LoadingMessage";
@@ -22,7 +22,7 @@ const Cards = ({ onSearch }) => {
     const indexOfFirstItem = indexOfLastItem - cardsPerPage;
 
     // const sliceOfPokemons = [...allPokemons];
-    const currentItemsToDisplay = allPokemons.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItemsToDisplay = allPokemons?.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         // setCurrentPage(1);
@@ -62,7 +62,7 @@ const Cards = ({ onSearch }) => {
                     )
                 }
             </div>
-            <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay} />
+            <PaginationBtn currentPage={currentPage} cardsPerPage={cardsPerPage} setCurrentPage={setCurrentPage} currentItemsToDisplay={currentItemsToDisplay.length} />
         </div>
     )
 }
