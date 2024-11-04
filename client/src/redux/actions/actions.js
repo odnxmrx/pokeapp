@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 
 const URL_BASE = "https://pokeapp-web-service.onrender.com/pokemonapi";
-// const URL_BASE = 'http://localhost:3001/pokemonapi';
+// const URL_BASE = "http://localhost:3001/pokemonapi";
 
 export const getAllPokemons = () => {
   return async (dispatch) => {
@@ -67,13 +67,12 @@ export const getAllTypes = () => {
   };
 };
 
-
 export const filterBySource = (pokemonsource) => {
   return {
     type: FILTER_BY_SOURCE,
     payload: pokemonsource,
-  }
-}
+  };
+};
 
 export const filterByPokemonType = (type) => {
   return {

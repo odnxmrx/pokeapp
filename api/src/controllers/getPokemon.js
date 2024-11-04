@@ -31,7 +31,7 @@ const getPokemon = async (name) => {
     } else {
       //no se envio query =?name
       let POKEMON_OFFSET = 0;
-      let POKEMON_LIMIT = 50;
+      let POKEMON_LIMIT = 80;
       let spreadPokemons = [];
 
       try {
@@ -49,19 +49,19 @@ const getPokemon = async (name) => {
         });
 
         //first 50 call
-        const allApiPokemon50 = await getApiPokemonLot(POKEMON_OFFSET, POKEMON_LIMIT); //llamando la función asincronica
-        
-        spreadPokemons = [...allDatabasePokemon, ...allApiPokemon50];
-        
-        return spreadPokemons;
+        const allApiPokemon50 = await getApiPokemonLot(
+          POKEMON_OFFSET,
+          POKEMON_LIMIT
+        ); //llamando la función asincronica
 
+        spreadPokemons = [...allDatabasePokemon, ...allApiPokemon50];
+
+        return spreadPokemons;
       } catch (error) {
         return { error: error.message };
       } finally {
-        const allApiPokemon150 = await getApiPokemonLot(POKEMON_OFFSET + 50, POKEMON_LIMIT + 50); //SPLIT into 2nd lot
-
-        return [...spreadPokemons, ...allApiPokemon150];
-        
+        //const allApiPokemon150 = await getApiPokemonLot(POKEMON_OFFSET + 50, POKEMON_LIMIT + 50); //SPLIT into 2nd lot
+        //return [...spreadPokemons, ...allApiPokemon150];
       }
     }
   } catch (error) {}

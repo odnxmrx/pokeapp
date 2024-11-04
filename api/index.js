@@ -17,15 +17,17 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js'); //también se nombra 'app'
-const { conn } = require('./src/config/db.js');
-require('dotenv').config();
+const server = require("./src/app.js"); //también se nombra 'app'
+const { conn } = require("./src/config/db.js");
+require("dotenv").config();
 
-const { SERVER_PORT } = process.env || 3001;
+const { SERVER_PORT } = process.env;
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
   server.listen(SERVER_PORT, () => {
+    //console.log("DATABASE_URI:", DATABASE_URI);
+
     console.log(`%s listening at ${SERVER_PORT}`); // eslint-disable-line no-console
   });
 });
