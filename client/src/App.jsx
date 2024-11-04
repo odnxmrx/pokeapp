@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,10 +46,20 @@ function App() {
   }
 
   useEffect(() => {
-    //componentDidMout
-    dispatch(getAllPokemons());
-    dispatch(getAllTypes());
-  }, [])
+    // Check if the page has been loaded before
+    const isReloaded = localStorage.getItem('isReloaded');
+
+    if (!isReloaded) {
+      // Reload the page
+      localStorage.setItem('isReloaded', 'true');
+      window.location.reload();
+    } else {
+      // Fetch data
+      dispatch(getAllPokemons());
+      dispatch(getAllTypes());
+    }
+  }, [dispatch]);
+
 
 
   return (
