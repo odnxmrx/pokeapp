@@ -31,7 +31,7 @@ const getPokemon = async (name) => {
     } else {
       //no se envio query =?name
       let POKEMON_OFFSET = 0;
-      let POKEMON_LIMIT = 80;
+      let POKEMON_LIMIT = 80; // Actual limit
       let spreadPokemons = [];
 
       try {

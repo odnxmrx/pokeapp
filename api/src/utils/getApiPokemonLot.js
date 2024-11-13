@@ -1,24 +1,41 @@
 const mapPokemonObject = require("./mapPokemon");
 const API_POKEMON_URL = `https://pokeapi.co/api/v2/pokemon`;
 
-const getApiPokemonLot = async (POKEMON_OFFSET, POKEMON_LIMIT) => {  
-  
-  let arrayOfIterablePokemon = [];
+const getApiPokemonLot = async (POKEMON_OFFSET, POKEMON_LIMIT) => {
   try {
-    const response = await fetch(`${API_POKEMON_URL}?offset=${POKEMON_OFFSET}&limit=${POKEMON_LIMIT}`);
+    const response = await fetch(
+      `${API_POKEMON_URL}?offset=${POKEMON_OFFSET}&limit=${POKEMON_LIMIT}`
+    );
     const allPokemon = await response.json();
 
-    for (const pokemon of allPokemon.results) {
-      const pokemonDetailResponse = await fetchPokemonDetail(pokemon); //llamada a fn asincrona
-      arrayOfIterablePokemon.push(pokemonDetailResponse);
-    }
+    const pokemonDetailPromises = allPokemon.results.map((pokemon) =>
+      fetchPokemonDetail(pokemon)
+    );
+    const arrayOfIterablePokemon = await Promise.all(pokemonDetailPromises);
+    return arrayOfIterablePokemon;
   } catch (error) {
     return { error };
-  } 
-  // console.log('el fetch array: ', arrayOfIterablePokemon);
-  
-  return arrayOfIterablePokemon;
+  }
 };
+
+// const getApiPokemonLot = async (POKEMON_OFFSET, POKEMON_LIMIT) => {
+
+//   let arrayOfIterablePokemon = [];
+//   try {
+//     const response = await fetch(`${API_POKEMON_URL}?offset=${POKEMON_OFFSET}&limit=${POKEMON_LIMIT}`);
+//     const allPokemon = await response.json();
+
+//     for (const pokemon of allPokemon.results) {
+//       const pokemonDetailResponse = await fetchPokemonDetail(pokemon); //llamada a fn asincrona
+//       arrayOfIterablePokemon.push(pokemonDetailResponse);
+//     }
+//   } catch (error) {
+//     return { error };
+//   }
+//   // console.log('el fetch array: ', arrayOfIterablePokemon);
+
+//   return arrayOfIterablePokemon;
+// };
 
 const fetchPokemonDetail = async (singlePokemon) => {
   try {

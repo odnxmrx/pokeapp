@@ -2,19 +2,13 @@ const mapPokemonObject = (data) => {
   const mappedData = {
     id: data.id,
     name: data.name,
-    hp: data.stats.find((stat) => stat.stat.name === "hp").base_stat,
-    attack: data.stats.find((stat) => stat.stat.name === "attack").base_stat,
-    defense: data.stats.find((stat) => stat.stat.name === "defense").base_stat,
-    speed: data.stats.find((stat) => stat.stat.name === "speed").base_stat,
+    hp: data.stats[0]?.base_stat || 0, // Assuming hp, attack, defense, speed are in the same order
+    attack: data.stats[1]?.base_stat || 0,
+    defense: data.stats[2]?.base_stat || 0,
+    speed: data.stats[5]?.base_stat || 0,
     height: data.height,
     weight: data.weight,
-    // types: data.types.map((type) => type.type.name),
-    types: data.types.map((typArr, i) => { //formato igualado a como obtengo de BD
-      let pokeTypes = {}
-      pokeTypes["name"] = typArr.type.name;
-      return pokeTypes;
-    }),
-    // image: data.sprites.front_default,
+    types: data.types.map((typArr) => ({ name: typArr.type.name })),
     image: data.sprites.other.dream_world.front_default,
   };
 
