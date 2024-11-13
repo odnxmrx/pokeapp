@@ -18,25 +18,6 @@ const getApiPokemonLot = async (POKEMON_OFFSET, POKEMON_LIMIT) => {
   }
 };
 
-// const getApiPokemonLot = async (POKEMON_OFFSET, POKEMON_LIMIT) => {
-
-//   let arrayOfIterablePokemon = [];
-//   try {
-//     const response = await fetch(`${API_POKEMON_URL}?offset=${POKEMON_OFFSET}&limit=${POKEMON_LIMIT}`);
-//     const allPokemon = await response.json();
-
-//     for (const pokemon of allPokemon.results) {
-//       const pokemonDetailResponse = await fetchPokemonDetail(pokemon); //llamada a fn asincrona
-//       arrayOfIterablePokemon.push(pokemonDetailResponse);
-//     }
-//   } catch (error) {
-//     return { error };
-//   }
-//   // console.log('el fetch array: ', arrayOfIterablePokemon);
-
-//   return arrayOfIterablePokemon;
-// };
-
 const fetchPokemonDetail = async (singlePokemon) => {
   try {
     //del obj obtenido del fetch anterior
